@@ -6,16 +6,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import androidx.fragment.app.Fragment;
+
+import java.util.HashMap;
+
 public class BookDetailFragment extends Fragment {//Extending fragment because its a fragment this fragment will show details of the book
     TextView textView;//Creating textView
     public static final String BOOK_TITLE_KEY = "book title";//Creating a default value
     String bookTitle;//Creating booktitle variable
     public BookDetailFragment() {//Creating a constructor as required
     }
-    public static BookDetailFragment newInstance(String bookTitle) {//Creating a new instance that will be used depending on which book selected
+    public static BookDetailFragment newInstance(HashMap book) {//Creating a new instance that will be used depending on which book selected
         BookDetailFragment bookDetailsFragment = new BookDetailFragment();//Creating  bookDetailsFragment that will be used for a specific book
         Bundle args = new Bundle();//creating bundle that will be used for args
-        args.putString(BOOK_TITLE_KEY, bookTitle);//putting the bookTitle to the booktitlekey
+        args.putSerializable(BOOK_TITLE_KEY, book);//putting the bookTitle to the booktitlekey
         bookDetailsFragment.setArguments(args);//setting the args from the bundle to communicate
         return bookDetailsFragment;//returning the bookDetailFragment
     }
