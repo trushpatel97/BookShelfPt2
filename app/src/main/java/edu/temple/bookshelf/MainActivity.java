@@ -32,15 +32,15 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
         initialBook.put("title", "Default book");
         initialBook.put("author", "Default author");
         books.addAll(Arrays.asList(res.getStringArray(R.array.titles)));//Gets all the titles and adds it to the arraylist
-        smallScreen = (findViewById(R.id.container_2) == null);// Check if we're using a small screen. If so we dont want to use container two in the same pane later on
+        smallScreen = (findViewById(R.id.container_1) == null);// Check if we're using a small screen. If so we dont want to use container two in the same pane later on
         Fragment c1frag= getSupportFragmentManager().findFragmentById(R.id.container_1);//getsupportfragmentmanager is used for transactions for adding removing and replacing for container1fragment
 
         if (c1frag == null && smallScreen) { // if container_1 has no Fragment already attached to it and we're using a small screen // Attaching ViewPagerFragment
-            getSupportFragmentManager().beginTransaction().addToBackStack(null).add(R.id.container_1,new Activity().commit();//Starting transaction and allowing to go back if the view changes then adding only the first container to show
+            getSupportFragmentManager().beginTransaction().addToBackStack(null).add(R.id.container_1,BookListFragment.newInstance(book)).commit();//Starting transaction and allowing to go back if the view changes then adding only the first container to show
         } else if (c1frag instanceof BookListFragment && smallScreen) { // if container1Fragment is a BookListFragment, meaning we're coming back to singlePane from landscape mode // Attaching ViewPagerFragment
-            getSupportFragmentManager().beginTransaction().replace(R.id.container_1, new Activity().commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.container_1, BookListFragment.newInstance(book)).commit();
         } else { // it's not small screen or its null // Attaching BookListFragment
-            getSupportFragmentManager().beginTransaction().replace(R.id.container_1, BookListFragment.newInstance(books)).commit();//if its not a smallScreen then we want to create a newInstance and have BookListFragment accept books
+            getSupportFragmentManager().beginTransaction().replace(R.id.container_1, BookListFragment.newInstance(book)).commit();//if its not a smallScreen then we want to create a newInstance and have BookListFragment accept books
         }
     }
     @Override
