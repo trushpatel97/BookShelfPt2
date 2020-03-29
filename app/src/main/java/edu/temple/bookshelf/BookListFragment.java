@@ -9,6 +9,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import androidx.fragment.app.Fragment;
 import java.util.ArrayList;
+import java.util.HashMap;
+
 public class BookListFragment extends Fragment {
     ArrayList<String> books;//Creating an array list for the books
     public final static String BOOKS_KEY = "books";//Giving it a string for the books
@@ -26,10 +28,10 @@ public class BookListFragment extends Fragment {
      * @param books ArrayList<String> of book titles
      * @return A new instance of fragment BookListFragment.
      */
-    public static BookListFragment newInstance(ArrayList<String> books) {//Creating the new instance that will be used to communicate the book selected
+    public static BookListFragment newInstance(ArrayList<HashMap> books) {//Creating the new instance that will be used to communicate the book selected
         BookListFragment bookListFragment = new BookListFragment();//new fragment list
         Bundle args = new Bundle();//making bundle for communication
-        args.putStringArrayList(BOOKS_KEY, books);//puuting the book name in the key
+        args.putSerializable(BOOKS_KEY, books);//puuting the book name in the key
         bookListFragment.setArguments(args);//setting the arguement to take bundle
         return bookListFragment;//return this specific book list fragment
     }
@@ -100,4 +102,3 @@ public class BookListFragment extends Fragment {
      * >Communicating with Other Fragments</a> for more information.
      */
 }
-
