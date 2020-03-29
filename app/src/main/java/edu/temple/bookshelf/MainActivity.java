@@ -6,19 +6,35 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity implements BookListFragment.OnBookSelectedInterface {
     BookDetailFragment bookDetailsFragment;//creating a variable for bookdetailfragment so we can use it to do different actions such as specifying which container should handle what fragment
     ArrayList<String> books = new ArrayList<>();//creating a arraylist to store the books
+    ArrayList<HashMap> book;
     boolean smallScreen;//do we have a small screen
     @Override
     protected void onCreate(Bundle savedInstanceState) {//using this onCreate to do stuff once program starts
         super.onCreate(savedInstanceState);//on create do this
         setContentView(R.layout.activity_main);//we will be using the activity main
         Resources res = getResources();//Here i am trying to get the resources
+        int i;
+        Resources resources = getResources();
+        final String [] titles = resources.getStringArray(R.array.titles);
+        final String [] authors = resources.getStringArray(R.array.authors);
+        books = new ArrayList<>();
+        for(i=0;i<titles.length;i++){
+            HashMap book = new HashMap();
+            book.put("title", titles[i]);
+            book.put("author", authors[i]);
+        }
+        HashMap initialBook = new HashMap();
+        initialBook.put("title", "Default book");
+        initialBook.put("author", "Default author");
         books.addAll(Arrays.asList(res.getStringArray(R.array.titles)));//Gets all the titles and adds it to the arraylist
         smallScreen = (findViewById(R.id.container_2) == null);// Check if we're using a small screen. If so we dont want to use container two in the same pane later on
         Fragment c1frag= getSupportFragmentManager().findFragmentById(R.id.container_1);//getsupportfragmentmanager is used for transactions for adding removing and replacing for container1fragment
+
         if (c1frag == null && smallScreen) { // if container_1 has no Fragment already attached to it and we're using a small screen // Attaching ViewPagerFragment
             getSupportFragmentManager().beginTransaction().addToBackStack(null).add(R.id.container_1,new Activity().commit();//Starting transaction and allowing to go back if the view changes then adding only the first container to show
         } else if (c1frag instanceof BookListFragment && smallScreen) { // if container1Fragment is a BookListFragment, meaning we're coming back to singlePane from landscape mode // Attaching ViewPagerFragment
