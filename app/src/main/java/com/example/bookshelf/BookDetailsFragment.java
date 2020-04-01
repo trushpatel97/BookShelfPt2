@@ -7,7 +7,13 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
+
+import org.w3c.dom.Text;
 
 import java.util.HashMap;
 
@@ -50,14 +56,20 @@ public class BookDetailsFragment extends Fragment {
 
         titleTextView = v.findViewById(R.id.titleTextView);
         authorTextView = v.findViewById(R.id.authorTextView);
+        TextView title = v.findViewById(R.id.bookTitle);
+        TextView author = v.findViewById(R.id.bookAuthor);
+        ImageView coverImg = v.findViewById(R.id.bookCover);
 
         /*
         Because this fragment can be created with or without
         a book to display when attached, we need to make sure
         we don't try to display a book if one isn't provided
          */
-        if (book != null)
-            displayBook(book);
+        if (book != null){
+            title.setText(book.getTitle());
+            author.setText(book.getAuthor());
+            Picasso.get().load(book.getCoverURL()).into(coverImg);
+        }
         return v;
     }
 
