@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 import java.util.HashMap;
 
 
@@ -50,6 +52,9 @@ public class BookDetailsFragment extends Fragment {
 
         titleTextView = v.findViewById(R.id.titleTextView);
         authorTextView = v.findViewById(R.id.authorTextView);
+        TextView title = v.findViewById(R.id.bookTitle);
+        TextView author = v.findViewById(R.id.bookAuthor);
+        TextView coverImg =  v.findViewById(R.id.bookCover);
 
         /*
         Because this fragment can be created with or without
@@ -57,7 +62,8 @@ public class BookDetailsFragment extends Fragment {
         we don't try to display a book if one isn't provided
          */
         if (book != null)
-            displayBook(book);
+            title.setText(book.getTitle());
+
         return v;
     }
 
