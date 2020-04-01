@@ -15,13 +15,13 @@ import java.util.HashMap;
 public class BookDetailsFragment extends Fragment {
 
     private static final String BOOK_KEY = "book";
-    private HashMap<String, String> book;
-
+    private Book book;
+    String API_Link = "https://kamorris.com/lab/abp/booksearch.php?search=";
     TextView titleTextView, authorTextView;
 
     public BookDetailsFragment() {}
 
-    public static BookDetailsFragment newInstance(HashMap<String, String> book) {
+    public static BookDetailsFragment newInstance(Book book) {
         BookDetailsFragment fragment = new BookDetailsFragment();
         Bundle args = new Bundle();
 
@@ -30,7 +30,7 @@ public class BookDetailsFragment extends Fragment {
          therefore we can place a HashMap inside a bundle
          by using that put() method.
          */
-        args.putSerializable(BOOK_KEY, book);
+        args.putParcelable(BOOK_KEY, book);
         fragment.setArguments(args);
         return fragment;
     }
@@ -39,7 +39,7 @@ public class BookDetailsFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            book = (HashMap) getArguments().getSerializable(BOOK_KEY);
+            this.book = (Book) getArguments().getParcelable(BOOK_KEY);
         }
     }
 
