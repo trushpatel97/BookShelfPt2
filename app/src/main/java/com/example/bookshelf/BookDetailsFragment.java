@@ -15,7 +15,6 @@ import com.squareup.picasso.Target;
 
 import org.w3c.dom.Text;
 
-import java.util.HashMap;
 
 
 public class BookDetailsFragment extends Fragment {
@@ -77,8 +76,7 @@ public class BookDetailsFragment extends Fragment {
     This method is used both internally and externally (from the activity)
     to display a book
      */
-    public void displayBook(HashMap<String, String> book) {
-        titleTextView.setText(book.get("title"));
-        authorTextView.setText(book.get("author"));
+    public void displayBook(Book book) {
+
     }
 }

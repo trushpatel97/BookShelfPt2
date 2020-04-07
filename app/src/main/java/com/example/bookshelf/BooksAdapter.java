@@ -1,34 +1,44 @@
 package com.example.bookshelf;
 
 import android.content.Context;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.LinearLayout;
 import android.widget.TextView;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
+
 public class BooksAdapter extends BaseAdapter {
 
     Context context;
-    ArrayList<HashMap<String, String>> books;
+    public JSONArray jsonArray;
 
-    public BooksAdapter (Context context, ArrayList books) {
+    public BooksAdapter (Context context, JSONArray jsonArray) {
         this.context = context;
-        this.books = books;
+        this.jsonArray = jsonArray;
     }
+
+
 
     @Override
     public int getCount() {
-        return books.size();
+        return jsonArray.length();
     }
 
     @Override
-    public Object getItem(int position) {
-        return books.get(position);
+    public JSONObject getItem(int position) {
+        JSONObject jsonObject = new JSONObject();
+        try{
+            jsonObject = jsonArray.getJSONObject(position);
+        }catch (JSONException error){
+            error.printStackTrace();
+        }
+        return jsonObject;
     }
 
     @Override
@@ -38,22 +48,12 @@ public class BooksAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        TextView titleTextView, authorTextView;
-
-        if (!(convertView instanceof LinearLayout)) {
-            /*
-            Inflate a predefined layout file that includes 2 text views.
-            We could do this in code, but this seems a little easier
-             */
-            convertView = LayoutInflater.from(context).inflate(R.layout.books_adapter_layout, parent, false);
+        TextView tv=new TextView(context);
+        try{
+            tv.setText(jsonArray.getJSONObject(position).getString("title"));
+        }catch (JSONException error){
+            error.printStackTrace();
         }
-
-        titleTextView = convertView.findViewById(R.id.titleTextView);
-        authorTextView = convertView.findViewById(R.id.authorTextView);
-
-        titleTextView.setText(((HashMap<String, String>) getItem(position)).get("title"));
-        authorTextView.setText(((HashMap<String, String>) getItem(position)).get("author"));
-
-        return convertView;
+        return tv;
     }
 }
