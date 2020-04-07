@@ -26,6 +26,7 @@ public class BookDetailsFragment extends Fragment {
     private Book book;
     String API_Link = "https://kamorris.com/lab/abp/booksearch.php?search=";
     TextView titleTextView, authorTextView;
+    ImageView cover;
     //******************************************************************************************************
 
 
@@ -103,10 +104,9 @@ public class BookDetailsFragment extends Fragment {
 
     //Method I didnt use but might need**********************************************************************
     public void displayBook(Book book) {
-            /*
-        This method is used both internally and externally (from the activity)
-        to display a book
-         */
+        titleTextView.setText(book.getTitle());
+        authorTextView.setText(book.getAuthor());
+        Picasso.get().load(book.getCoverURL()).into(cover);
     }
     //*******************************************************************************************************
 }
