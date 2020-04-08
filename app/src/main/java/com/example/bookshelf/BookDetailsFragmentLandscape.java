@@ -13,12 +13,27 @@ import androidx.fragment.app.Fragment;
 import com.squareup.picasso.Picasso;
 import org.w3c.dom.Text;
 public class BookDetailsFragmentLandscape extends Fragment {
+
+    //Declaring the layout stuff for this class to use********************************************************
     TextView titleLandscape;
     TextView authorLandscape;
     ImageView coverLandscape;
+    //********************************************************************************************************
+
+
+
+
+
+    //Creating an empty constructor as required by the class/compiler*****************************************
     public BookDetailsFragmentLandscape() {
         // Required empty public constructor
     }
+    //********************************************************************************************************
+
+
+
+
+    //onCreateView, will inflate or basically fill in the fragment with what its supposed to do***************
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -28,9 +43,23 @@ public class BookDetailsFragmentLandscape extends Fragment {
         coverLandscape = v.findViewById(R.id.bookCoverLandscape);
         return v;
     }
+    //********************************************************************************************************
+
+
+
+
+
+
+    //Display book names display the book name as*****(********************************************************
     public void displayBookName(Book book) {
         titleLandscape.setText(book.getTitle());
         authorLandscape.setText(book.getAuthor());
         Picasso.get().load(book.getCoverURL()).into(coverLandscape);
     }
+    //********************************************************************************************************
+
+
+
+
+
 }

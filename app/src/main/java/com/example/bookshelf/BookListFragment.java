@@ -20,12 +20,16 @@ import java.util.HashMap;
 
 public class BookListFragment extends Fragment {
 
+    //Made class variables and JSON that will be used to retrieve book info****************************************
     private static final String BOOK_LIST_KEY = "booklist";
     JSONArray jsonArray;
     BooksAdapter booksAdapter;
     ListView bookList;
     BookSelectedInterface parentActivity;
+    //************************************************************************************************************
 
+
+    //Creating a new instance of  Books that will basically let us set arguments for communication****************
     public static BookListFragment newInstance(ArrayList<HashMap<String, String>> books) {
         BookListFragment fragment = new BookListFragment();
         Bundle args = new Bundle();
@@ -39,7 +43,9 @@ public class BookListFragment extends Fragment {
         fragment.setArguments(args);
         return fragment;
     }
+    //**********************************************************************************************************
 
+    //On attach it will tell us if we implemented the interface or not******************************************
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -54,6 +60,7 @@ public class BookListFragment extends Fragment {
             throw new RuntimeException("Please implement the required interface(s)");
         }
     }
+    //*********************************************************************************************************
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -63,12 +70,13 @@ public class BookListFragment extends Fragment {
         }
     }
 
+    //onCreateView it will show you the list of the books in this fragment*********************************
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_book_list, container, false);
         bookList = v.findViewById(R.id.bookListView);
-
+        //Waiting to see what you clicked
         bookList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
@@ -87,21 +95,26 @@ public class BookListFragment extends Fragment {
         // Inflate the layout for this fragment
         return v;
     }
+    //***********************************************************************************************************
 
-    /*
-    Interface for communicating with attached activity
-     */
+    //Interface for communicating with attached activity*********************************************************
     interface BookSelectedInterface {
         void bookSelected(int index);
     }
+    //***********************************************************************************************************
+
+    //Filling up the json array**********************************************************************************
     public void setJsonArray(JSONArray jsonArray) {
         this.jsonArray = jsonArray;
         booksAdapter = new BooksAdapter(getContext(), jsonArray);
         bookList.setAdapter(booksAdapter);
         booksAdapter.notifyDataSetChanged();
     }
+    //**********************************************************************************************************
 
+    //Interface created to communicate with the mainActivity this will tell us which book is selected**********
     public interface retrieveBooks {
         void bookSelected(Book book);
     }
+    //*********************************************************************************************************
 }
