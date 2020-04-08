@@ -12,10 +12,10 @@ import androidx.viewpager.widget.PagerAdapter;
 import java.util.ArrayList;
 
 public class ViewPagerAdapter extends FragmentStatePagerAdapter {
-    public ArrayList<BookDetailsFragment> bookDetailsFragments;
-    public ViewPagerAdapter(FragmentManager fm, ArrayList<BookDetailsFragment> bookDetailsFragments) {
-        super(fm);
-        this.bookDetailsFragments = bookDetailsFragments;
+    public ArrayList<BookDetailsFragment> bookDetailsFragments;//Creating bookdetails arraylist
+    public ViewPagerAdapter(FragmentManager fm, ArrayList<BookDetailsFragment> bookDetailsFragments) {//creating a constructor
+        super(fm);//setting the super so it can be used
+        this.bookDetailsFragments = bookDetailsFragments;//setting this to bookdetailsfragments
     }
 
 
@@ -28,7 +28,7 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
         }
         notifyDataSetChanged(); // FragmentStatePagetAdapter object.
     }
-
+    //setting some getters in the functions below to return specific stuff****************************************************************
     @Override
     public Fragment getItem(int i) {
         return bookDetailsFragments.get(i);
@@ -44,4 +44,5 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
     public int getItemPosition(@NonNull Object object) {
         return PagerAdapter.POSITION_NONE;
     }
+    //*************************************************************************************************************************************
 }
