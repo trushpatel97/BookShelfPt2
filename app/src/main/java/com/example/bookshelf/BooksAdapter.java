@@ -15,21 +15,19 @@ import java.util.HashMap;
 
 public class BooksAdapter extends BaseAdapter {
 
+    //Creating private variables for the class to use*********************************************************
     Context context;
     public JSONArray jsonArray;
+    //********************************************************************************************************
 
+    //Creating a constuctor for the books adapter*************************************************************
     public BooksAdapter (Context context, JSONArray jsonArray) {
         this.context = context;
         this.jsonArray = jsonArray;
     }
+    //********************************************************************************************************
 
-
-
-    @Override
-    public int getCount() {
-        return jsonArray.length();
-    }
-
+    //Getting the json items of the position clicked on*******************************************************
     @Override
     public JSONObject getItem(int position) {
         JSONObject jsonObject = new JSONObject();
@@ -40,12 +38,9 @@ public class BooksAdapter extends BaseAdapter {
         }
         return jsonObject;
     }
+    //********************************************************************************************************
 
-    @Override
-    public long getItemId(int position) {
-        return 0;
-    }
-
+    //Setting the text of the view by the title***************************************************************
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         TextView tv=new TextView(context);
@@ -56,4 +51,16 @@ public class BooksAdapter extends BaseAdapter {
         }
         return tv;
     }
+    //********************************************************************************************************
+
+    //public methods that will return a value of how many there are in json and the items position************
+    @Override
+    public int getCount() {
+        return jsonArray.length();
+    }
+    @Override
+    public long getItemId(int position) {
+        return 0;
+    }
+    //********************************************************************************************************
 }
